@@ -5,8 +5,9 @@ const {
   getAllDiscussion,
   getSingleDiscussion,
 } = require("../controller/discussionController");
+const { auth } = require("../middleware/auth");
 
-router.route("/").get(getAllDiscussion).post(createDiscussion);
-router.get("/:discussionId", getSingleDiscussion);
+router.route("/").get(auth, getAllDiscussion).post(auth, createDiscussion);
+router.get("/:discussionId", auth, getSingleDiscussion);
 
 module.exports = router;

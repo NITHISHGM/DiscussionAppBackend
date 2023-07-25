@@ -5,8 +5,9 @@ const {
   addComment,
   getCommentsForSpecificId,
 } = require("../controller/commentController");
+const { auth } = require("../middleware/auth");
 
-router.get("/:discussionId", getCommentsForSpecificId);
-router.post("/", addComment);
+router.get("/:discussionId", auth, getCommentsForSpecificId);
+router.post("/", auth, addComment);
 
 module.exports = router;
