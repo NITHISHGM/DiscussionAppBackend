@@ -1,4 +1,5 @@
-const Register = require("../modal/register");
+const User = require("../modal/user");
+const bcrypt = require("bcrypt");
 
 const registerUser = async (req, res) => {
   try {
@@ -8,7 +9,7 @@ const registerUser = async (req, res) => {
         error: "Please fill all the fields",
       });
     } else {
-      let userExist = await Register.findOne({
+      let userExist = await User.findOne({
         email,
       });
       if (userExist) {
@@ -16,10 +17,13 @@ const registerUser = async (req, res) => {
           error: "Exisiting user...",
         });
       }
-      let createNewUser = await Register.create({
+
+      // Hash the password
+      let hashedPassword = await bcrypt.hash(password, 10);
+      let createNewUser = await User.create({
         name,
         email,
-        password,
+        password: hashedPassword,
       });
       res.status(201).json(createNewUser);
     }

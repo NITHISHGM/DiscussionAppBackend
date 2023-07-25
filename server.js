@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //router intilization
+app.use("/api", require("./routes/loginRegister"));
 app.use("/api/discussion", require("./routes/discussionRoute"));
 app.use("/api/commnet", require("./routes/commentRoute"));
 
