@@ -3,6 +3,7 @@ const app = express();
 require("dotenv").config();
 const PORT = process.env.PORT || 6000;
 const { dbConnect } = require("./config/db");
+const cors = require("cors");
 
 //commented for cyclic deployment
 //DB connection
@@ -11,6 +12,7 @@ dbConnect();
 //parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 //router intilization
 app.use("/api", require("./routes/loginRegister"));
