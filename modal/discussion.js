@@ -6,6 +6,11 @@ const discussionSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    createrName: {
+      type: String,
+      required: true,
+    },
+
     content: {
       type: String,
       required: true,

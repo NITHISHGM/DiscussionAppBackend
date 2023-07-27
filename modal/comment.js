@@ -5,6 +5,10 @@ const commentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Discussion",
     },
+    commenterName: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       required: true,

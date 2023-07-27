@@ -10,6 +10,7 @@ const addComment = async (req, res) => {
     }
     let addCommentToId = await Comment.create({
       discussionId,
+      commenterName: req.user.name,
       content,
     });
     res.status(200).json(addCommentToId);

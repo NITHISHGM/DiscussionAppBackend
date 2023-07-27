@@ -8,7 +8,11 @@ const createDiscussion = async (req, res) => {
         error: "Please add all the fields",
       });
     } else {
-      let createNewDiscussion = await Discussion.create({ title, content });
+      let createNewDiscussion = await Discussion.create({
+        title,
+        createrName: req.user.name,
+        content,
+      });
       res.status(201).json(createNewDiscussion);
     }
   } catch (error) {
