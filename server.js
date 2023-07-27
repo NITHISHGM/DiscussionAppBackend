@@ -4,8 +4,9 @@ require("dotenv").config();
 const PORT = process.env.PORT || 6000;
 const { dbConnect } = require("./config/db");
 
+//commented for cyclic deployment
 //DB connection
-dbConnect();
+// dbConnect();
 
 //parser middleware
 app.use(express.json());
@@ -16,8 +17,16 @@ app.use("/api", require("./routes/loginRegister"));
 app.use("/api/discussion", require("./routes/discussionRoute"));
 app.use("/api/commnet", require("./routes/commentRoute"));
 
-app.listen(PORT, (err) => {
-  if (!err) {
-    console.log(`Server started on port ${PORT}`);
-  }
+dbConnect().then(() => {
+  app.listen(PORT, () => {
+    console.log("listening for requests");
+  });
 });
+
+//commented for cyclic deployment
+
+// app.listen(PORT, (err) => {
+//   if (!err) {
+//     console.log(`Server started on port ${PORT}`);
+//   }
+// });
